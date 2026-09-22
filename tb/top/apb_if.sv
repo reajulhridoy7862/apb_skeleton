@@ -9,7 +9,7 @@ interface apb_if(input logic PCLK);
     logic [31:0] PWDATA;
     logic [31:0] PRDATA;
 
-    logic        PREADY;
+    logic        PREADY = 1'b0;
     logic        PSLVERR;
 
 endinterface

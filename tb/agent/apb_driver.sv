@@ -79,7 +79,6 @@ class apb_driver extends uvm_driver#(apb_seq_item);
     vif.PWRITE      <= 1'b1;
     vif.PADDR       <= req.PADDR;
     vif.PWDATA      <= req.PWDATA;
-    vif.PREADY      <= 0;
 
   //  `uvm_info("DRIVER", $sformat("SETUP: WRITE=%0b ADDR=0x%08h DATA=0x%08h",req.PWRITE, req.PADDR, req.PWDATA), UVM_LOW)
 
@@ -115,7 +114,6 @@ class apb_driver extends uvm_driver#(apb_seq_item);
     vif.PENABLE     <= 1'b0;
     vif.PWRITE      <= 1'b0;
     vif.PADDR       <= req.PADDR;
-    vif.PREADY      <= 0;
     
   //  `uvm_info("DRIVER", $sformat("SETUP: WRITE=%0b ADDR=0x%08h",req.PWRITE, req.PADDR), UVM_LOW)
 
