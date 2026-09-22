@@ -1,13 +1,13 @@
 
-class agent extends uvm_agent;
+class apb_agent extends uvm_agent;
 
-  `uvm_component_utils(agent)
+  `uvm_component_utils(apb_agent)
 
-  driver drv;
-  seqcr seqr;
-  monitor mon;
+  apb_driver drv;
+  apb_sequencer seqr;
+//  apb_monitor mon;
 
-  function new(string name = "agent", uvm_component parent = null);
+  function new(string name = "apb_agent", uvm_component parent = null);
     super.new(name, parent);
   endfunction
 
@@ -16,11 +16,11 @@ class agent extends uvm_agent;
 
     `uvm_info(get_type_name(), "INSIDE AGENT BUILD PHASE", UVM_LOW)
 
-    drv = driver::type_id::create("drv", this);
+    drv = apb_driver::type_id::create("drv", this);
 
-    mon = monitor::type_id::create("mon", this);
+//    mon = apb_monitor::type_id::create("mon", this);
 
-    seqr = seqcr::type_id::create("seqr", this);
+    seqr = apb_sequencer::type_id::create("seqr", this);
     
   endfunction
 

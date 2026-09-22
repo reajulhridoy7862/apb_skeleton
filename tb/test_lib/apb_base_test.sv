@@ -1,10 +1,10 @@
 
-class base_test extends uvm_test;
+class apb_base_test extends uvm_test;
 
-  `uvm_component_utils(base_test)
-  my_env env;
+  `uvm_component_utils(apb_base_test)
+  apb_environment env;
 
-  function new(string name = "my_env", uvm_component parent = null);
+  function new(string name = "apb_base_test", uvm_component parent = null);
     super.new(name, parent);
   endfunction
 
@@ -13,7 +13,7 @@ class base_test extends uvm_test;
 
     `uvm_info(get_type_name(), "INSIDE BASE CLASS BUILD PHASE", UVM_LOW)
 
-    env = my_env::type_id::create("env", this);
+    env = apb_environment::type_id::create("env", this);
 
   endfunction
 
@@ -26,12 +26,12 @@ class base_test extends uvm_test;
 
   task run_phase(uvm_phase phase);
     
-    phase.raise_objection(this);
+    //phase.raise_objection(this);
 
     `uvm_info(get_type_name(), "INSIDE BASE CLASS RUN PHASE", UVM_LOW)
     
 
-    phase.drop_objection(this);
+    //phase.drop_objection(this);
 
   endtask
 

@@ -17,6 +17,8 @@ SNAPSHOT = $(TOP)_sim
 # UVM
 UVM_LIB = uvm
 
+TEST ?=dummy_test
+
 # UVM Verbosity
 # Can be overridden from command line:
 # make run VERBOSITY=UVM_HIGH
@@ -35,7 +37,9 @@ XELAB_OPTS = -L $(UVM_LIB) \
 
 # Simulation options
 XSIM_OPTS = --runall \
-            --testplusarg UVM_VERBOSITY=$(VERBOSITY)
+            --testplusarg UVM_VERBOSITY=$(VERBOSITY) \
+						--testplusarg UVM_TESTNAME=$(TEST)
+
 
 
 # Targets
@@ -57,6 +61,11 @@ elaborate: compile
 # Run simulation
 run: elaborate
 	$(XSIM) $(SNAPSHOT) $(XSIM_OPTS)
+
+gui: elaborate 
+	$(XSIM) $(SNAPSHOT) -gui \
+		--testplusarg UVM_VERBOSITY=$(VERBOSITY) \
+		--testplusarg UVM_TESTNAME=$(TEST)
 
 
 # Clean

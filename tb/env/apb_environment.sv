@@ -1,12 +1,12 @@
 
-class my_env extends uvm_env;
+class apb_environment extends uvm_env;
 
-  `uvm_component_utils(my_env)
+  `uvm_component_utils(apb_environment )
 
-  agent agt;
-  scoreboard sb;
+  apb_agent agt;
+  //apb_scoreboard sb;
 
-  function new(string name = "my_env", uvm_component parent = null);
+  function new(string name = "apb_environment", uvm_component parent = null);
     super.new(name, parent);
 
   endfunction
@@ -16,9 +16,9 @@ class my_env extends uvm_env;
 
     `uvm_info(get_type_name(), "INSIDE ENVIRONMENT BUILD PHASE", UVM_LOW)
 
-    agt = agent::type_id::create("agt", this);
+    agt = apb_agent::type_id::create("agt", this);
 
-    sb = scoreboard::type_id::create("sb", this);
+    //sb = apb_scoreboard::type_id::create("sb", this);
 
   endfunction
 

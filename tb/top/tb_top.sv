@@ -1,4 +1,4 @@
-import test_lib_pkg::*;
+import apb_test_lib_pkg::*;
 
 
 `include "uvm_macros.svh"
@@ -6,9 +6,35 @@ import uvm_pkg::*;
 
 module tb_top;
 
+  logic PCLK;
+  apb_if intf(PCLK);
+
+  initial begin
+
+    PCLK = 0;
+
+    forever #5 PCLK = ~PCLK;
+
+  end
+
   initial begin
   
-    run_test("base_test");
+    run_test("dummy_test");
+
+  end
+
+
+  initial begin 
+    uvm_config_db#(virtual apb_if)::set(null, "*", "vif", intf);
+
+  end
+
+
+
+  initial begin
+
+    $dumpfile("waveform.vcd");
+    $dumpvars(1, tb_top);
 
   end
 

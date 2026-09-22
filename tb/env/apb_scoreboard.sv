@@ -1,11 +1,11 @@
 
-class scoreboard extends uvm_scoreboard;
+class apb_scoreboard extends uvm_scoreboard;
 
-  `uvm_component_utils(scoreboard)
+  `uvm_component_utils(apb_scoreboard)
 
   //Constructor
 
-  function new(string name = "scoreboard", uvm_component parent = null);
+  function new(string name = "apb_scoreboard", uvm_component parent = null);
 
     super.new(name, parent);
 
