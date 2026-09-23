@@ -28,6 +28,8 @@ class apb_monitor extends uvm_monitor;
 
   function void connect_phase(uvm_phase phase);
     super.connect_phase(phase);
+    
+
     `uvm_info(get_type_name(), "INSIDE MONITOR CONNECT PHASE", UVM_LOW)
   endfunction
 
@@ -48,25 +50,24 @@ class apb_monitor extends uvm_monitor;
     //wait for Access
     @(posedge vif.PCLK);
 
-    if (vif.PSEL && vif.PENABLE) begin
+    if (vif.PSEL && vif.PENABLE && vif.PREADY) begin
       //wait untill pready high
-      wait( vif.PREADY == 1'b1);
 
       tr = apb_seq_item::type_id::create("tr");
-
-      tr.PWRITE   <= vif.PWRITE;
-      tr.PADDR    <= vif.PADDR;
-      tr.PSLVERR  <= vif.PSLVERR;
+      tr.PRESETn  = vif.PRESETn;
+      tr.PWRITE   = vif.PWRITE;
+      tr.PADDR    = vif.PADDR;
+      tr.PSLVERR  = vif.PSLVERR;
 
       if (vif.PWRITE) begin
-        tr.PWDATA     <= vif.PWDATA;
+        tr.PWDATA     = vif.PWDATA;
       end
 
       else begin
-        tr.PRDATA     <= vif.PRDATA;
+        tr.PRDATA     = vif.PRDATA;
 
       end
-
+      `uvm_info("MONITOR", $sformatf("CAPTURE: PWRITE=%0b ADDR=0x%0h DATA=0x%0h PSLVERR=%0b PRDATA=%0h", vif.PWRITE, vif.PADDR, vif.PWDATA, vif.PSLVERR, vif.PRDATA), UVM_LOW)
       analysis_port.write(tr);
 
     end
@@ -74,5 +75,4 @@ class apb_monitor extends uvm_monitor;
   endtask
 
 endclass
-
 

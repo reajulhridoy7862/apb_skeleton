@@ -81,7 +81,7 @@ class apb_scoreboard extends uvm_scoreboard;
 
        ref_mem[tr.PADDR] = tr.PWDATA;
 
-       `uvm_info("SCOREBOARD", $sformat("WRITE: ADDR=0x%0h DATA=0x%0h", tr.PADDR, tr.PWDATA), UVM_LOW)
+       `uvm_info("SCOREBOARD", $sformatf("WRITE: EX_ADDR=0x%0h EX_DATA=0x%0h", tr.PADDR, ref_mem[tr.PADDR]), UVM_LOW)
        pass_count++;
 
      end
@@ -97,12 +97,14 @@ class apb_scoreboard extends uvm_scoreboard;
      end
 
      else if (ref_mem.exists(tr.PADDR)) begin
-       if (tr.PRDATA == ref_mem[tr.PADDR]) begin
+       `uvm_info("SCOREBOARD", $sformatf("PASS:READ -----------  ADDR=0x%0h EXPECTED= 0x%0h ACTUAL=0x%0h", tr.PADDR, ref_mem[tr.PADDR], tr.PRDATA), UVM_LOW)
 
-         `uvm_info("SCOREBOARD", $sformat("PASS:READ ADDR=0x%0h EXPECTED= 0x%0h ACTUAL=0x%0h", tr.PADDR, ref_mem[tr.PADDR], tr.PRDATA), UVM_LOW)
-         pass_count++
+       if (tr.PRDATA == ref_mem[tr.PADDR]) begin
+         `uvm_info("SCOREBOARD", $sformatf("PASS:READ -----------  ADDR=0x%0h EXPECTED= 0x%0h ACTUAL=0x%0h", tr.PADDR, ref_mem[tr.PADDR], tr.PRDATA), UVM_LOW)
+         pass_count++;
 
        end
+     
 
        else begin
 
@@ -111,67 +113,19 @@ class apb_scoreboard extends uvm_scoreboard;
          fail_count++;
 
        end
-
      end
 
-   endfunction
+  end
+
+  endfunction
 
 
-   function void report_phase(uvm_phase phase);
-     `uvm_info("SCOREBOARD", $sformat("TOTAL PASS= %0d", pass_count),UVM_LOW)
-     `uvm_info("SCOREBOARD", $sformat("TOTAL PASS= %0d", pass_count),UVM_LOW)
-
-
- endclass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  function void report_phase(uvm_phase phase);
+     `uvm_info("SCOREBOARD", $sformatf("===================SCOREBOARD SUMMARY==============="), UVM_LOW)
+     `uvm_info("SCOREBOARD", $sformatf("TOTAL PASS= %0d", pass_count), UVM_LOW)
+     `uvm_info("SCOREBOARD", $sformatf("TOTAL FAIL= %0d", fail_count), UVM_LOW)
+     `uvm_info("SCOREBOARD", $sformatf("====================================================="), UVM_LOW)
+  endfunction
 
 endclass
 
