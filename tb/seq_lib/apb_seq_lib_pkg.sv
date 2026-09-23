@@ -13,7 +13,9 @@ package apb_seq_lib_pkg;
 //  `include "apb_overwrite_sequence.sv"
 //  `include "apb_random_sequence.sv"
 //  `include "apb_reset_sequence.sv"
-  `include "apb_write_read_sequence.sv"
+  `include "apb_reset_sequence.sv"
+  `include "apb_write_sequence.sv"
+  `include "apb_read_sequence.sv"
   
 
 endpackage

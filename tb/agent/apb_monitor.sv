@@ -18,7 +18,7 @@ class apb_monitor extends uvm_monitor;
     super.build_phase(phase);
     if (!uvm_config_db#(virtual apb_if)::get(this, "", "vif", vif))
       `uvm_fatal("NO_VIF", "Virtual Interface not found")
-    analysis_port = new("analysis_port", this)
+    analysis_port = new("analysis_port", this);
 
 
     `uvm_info(get_type_name(), "INSIDE MONITOR BUILD PHASE", UVM_LOW)
@@ -48,7 +48,7 @@ class apb_monitor extends uvm_monitor;
     //wait for Access
     @(posedge vif.PCLK);
 
-    if (vif.PSEL1 && vif.PENABLE) begin
+    if (vif.PSEL && vif.PENABLE) begin
       //wait untill pready high
       wait( vif.PREADY == 1'b1);
 
@@ -59,12 +59,10 @@ class apb_monitor extends uvm_monitor;
       tr.PSLVERR  <= vif.PSLVERR;
 
       if (vif.PWRITE) begin
-        tr.kind       <= apb_seq_item::APB_WRITE;
         tr.PWDATA     <= vif.PWDATA;
       end
 
       else begin
-        tr.kind       <= apb_seq_item::APB_WRITE;
         tr.PRDATA     <= vif.PRDATA;
 
       end

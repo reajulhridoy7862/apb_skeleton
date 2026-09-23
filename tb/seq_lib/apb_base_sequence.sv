@@ -9,7 +9,7 @@ class apb_base_sequence extends uvm_sequence #(apb_seq_item);
   endfunction
 
 
-  task send_write(logic [31:0] addr, logic [31:0] data);
+ /* task send_write(logic [31:0] addr, logic [31:0] data);
 
     apb_seq_item req;
 
@@ -55,7 +55,7 @@ class apb_base_sequence extends uvm_sequence #(apb_seq_item);
 
     finish_item(req);
 
-  endtask
+  endtask*/
 
 
 

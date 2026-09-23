@@ -5,7 +5,8 @@ class apb_agent extends uvm_agent;
 
   apb_driver drv;
   apb_sequencer seqr;
-//  apb_monitor mon;
+  apb_monitor mon;
+  virtual apb_if vif;
 
   function new(string name = "apb_agent", uvm_component parent = null);
     super.new(name, parent);
@@ -14,11 +15,12 @@ class apb_agent extends uvm_agent;
   function void build_phase(uvm_phase phase);
     super.build_phase(phase);
 
+
     `uvm_info(get_type_name(), "INSIDE AGENT BUILD PHASE", UVM_LOW)
 
     drv = apb_driver::type_id::create("drv", this);
 
-//    mon = apb_monitor::type_id::create("mon", this);
+    mon = apb_monitor::type_id::create("mon", this);
 
     seqr = apb_sequencer::type_id::create("seqr", this);
     

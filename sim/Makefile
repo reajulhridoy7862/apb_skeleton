@@ -1,5 +1,6 @@
 # UVM / XSIM Makefile
 
+APB_CLK_PERIOD_NS ?= 10
 # Simulator
 XVLOG  = xvlog
 XELAB  = xelab
@@ -28,6 +29,7 @@ VERBOSITY ?= UVM_LOW
 # Compilation options
 XVLOG_OPTS = -sv \
              -L $(UVM_LIB) \
+						 -d APB_CLK_PERIOD_NS=$(APB_CLK_PERIOD_NS) \
              -f $(FILELIST)
 
 # Elaboration options
