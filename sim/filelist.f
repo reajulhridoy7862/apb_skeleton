@@ -1,4 +1,5 @@
 ../tb/top/apb_if.sv
+../tb/top/apb_assertion.sv
 ../tb/seq_lib/apb_seq_lib_pkg.sv
 ../tb/agent/apb_agent_pkg.sv
 ../tb/env/apb_environment_pkg.sv

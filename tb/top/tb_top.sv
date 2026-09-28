@@ -10,6 +10,11 @@ module tb_top;
   bit PCLK;
   apb_if intf(PCLK);
 
+  apb_assertion apb_protocol_assertion (
+    .vif(intf)
+  );
+
+
   initial begin
     PCLK = 0;
     forever #(`APB_CLK_PERIOD_NS / 2) PCLK = ~PCLK;
@@ -17,7 +22,7 @@ module tb_top;
 
   initial begin
     run_test("dummy_test");
-  end
+ end
 
 
   initial begin 
