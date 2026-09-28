@@ -1,3 +1,5 @@
+
+`timescale 1ns/1ps
 import apb_test_lib_pkg::*;
 
 `include "uvm_macros.svh"
@@ -28,4 +30,3 @@ module tb_top;
   end
 
 endmodule
-

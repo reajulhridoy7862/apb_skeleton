@@ -35,7 +35,11 @@ XVLOG_OPTS = -sv \
 # Elaboration options
 XELAB_OPTS = -L $(UVM_LIB) \
              -debug typical \
-             --relax
+             --relax \
+						 -cc_type sbct \
+						 -cov_db_dir ./coverage_db \
+						 -cov_db_name $(SNAPSHOT)
+
 
 # Simulation options
 XSIM_OPTS = --runall \
